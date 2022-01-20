@@ -18,5 +18,34 @@
     <ClCompile Include="Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Calculations.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawing.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLoop.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Events.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Declarations.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLoop.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawing.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Calculations.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
