@@ -2,10 +2,10 @@
 #include <SFML/Graphics.hpp>
 
 struct my_vect {
-	int x, y; 
+	float x, y; 
 	double vx, vy; 
 
-	my_vect(int x, int y, double vx, double vy) {
+	my_vect(float x, float y, double vx, double vy) {
 		this->x = x; 
 		this->y = y; 
 		this->vx = vx; 
@@ -40,5 +40,12 @@ struct Point_Charge {
 
 constexpr int screen_width = 500; 
 constexpr int screen_height = 750; 
+
+constexpr int points_per_row = 25; 
+constexpr int num_rows = 40; 
+
+constexpr int vector_length = 13; 
+constexpr int vector_height = 3; 
+constexpr int circle_size = 5; 
 
 void initSFML(sf::RenderWindow*);
