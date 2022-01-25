@@ -69,18 +69,7 @@ namespace Drawing {
 			return sf::Color(factor_left * 255, factor_right * 255, 0);  
 		}
 	}
-	/*
-	
-	f(50) = 0.5
-	f(150) = 0.75
-	f(250) = 1.0 (f(x>250) >= 1.0) 
 
-	h(500) = 0.75
-	h(2500) = 0.5
-	h(10000) = 0.25
-	h(25000) = 0
-	
-	*/
 	void init_SFML(sf::RenderWindow** rw) {
 
 		*rw = new sf::RenderWindow(sf::VideoMode(screen_width, screen_height), "Elektromagnetische Felder");

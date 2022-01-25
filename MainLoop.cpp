@@ -45,7 +45,7 @@ DRAWING:
 namespace MainLoop {
 
 	void run() {
-		
+
 		// create variables
 		std::vector<Point_Charge*> point_charges;
 		std::array<std::array<my_vect*, points_per_row>, num_rows> vectors;
