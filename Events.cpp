@@ -42,7 +42,7 @@ namespace Events {
 			for (int i = 0; i < point_charges.size(); i++) {
 				if (point_charges[i]->hits(mox, moy)) {
 
-					if (abs(point_charges[i]->charge + events.mouseWheel.delta) > 25) {
+					if (abs(point_charges[i]->charge + events.mouseWheel.delta) > max_charge) {
 						continue;
 					}
 
@@ -52,9 +52,33 @@ namespace Events {
 				}
 			}
 		}
+
+		void move_screen(sf::RenderWindow* rw, std::vector<Point_Charge*>& point_charges, int& old_x, int& old_y) {
+			int mox = sf::Mouse::getPosition(*rw).x;
+			int moy = sf::Mouse::getPosition(*rw).y;
+
+			int dx = mox - old_x; 
+			int dy = moy - old_y; 
+
+			for (int i = 0; i < point_charges.size(); i++) {
+				point_charges[i]->x += dx; 
+				point_charges[i]->y += dy; 
+			}
+
+			old_x = mox; 
+			old_y = moy; 
+		}
 	}
 
 	void handle_events(sf::RenderWindow* rw, std::vector<Point_Charge*>& point_charges) {
+
+		static bool screen_moving = false; 
+		static int old_x = 0; 
+		static int old_y = 0; 
+
+		if (screen_moving) {
+			move_screen(rw, point_charges, old_x, old_y); 
+		}
 
 		sf::Event events;
 
@@ -70,11 +94,24 @@ namespace Events {
 			}
 
 			if (events.type == sf::Event::MouseButtonPressed) {
-				create_point_charge(rw, events, point_charges); 
+				if (events.key.code == sf::Mouse::Middle) {
+					old_x = sf::Mouse::getPosition(*rw).x; 
+					old_y = sf::Mouse::getPosition(*rw).y; 
+					screen_moving = true; 
+				}
+				else {
+					create_point_charge(rw, events, point_charges);
+				}
 			}
 
 			if (events.type == sf::Event::MouseWheelMoved) {
 				resize_point_charge(rw, events, point_charges); 
+			}
+
+			if (events.type == sf::Event::MouseButtonReleased) {
+				if (events.key.code == sf::Mouse::Middle) {
+					screen_moving = false;
+				}
 			}
 
 		}

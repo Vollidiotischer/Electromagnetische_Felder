@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include "Declarations.h"
+#include "Calculations.h"
 
 namespace Drawing {
 
@@ -26,20 +27,18 @@ namespace Drawing {
 			rw->draw(rect);
 		}
 
-		void draw_arrow(sf::RenderWindow* rw, double x, double y, double w, double h) {
+		void draw_arrow(sf::RenderWindow* rw, double x, double y, double w, double h, sf::Color color) {
 			static sf::RectangleShape line({ vector_length, vector_height });
 			static sf::CircleShape triangle(circle_size, 3); // TRIANGLE
 
-			line.setFillColor(sf::Color::Black);
-			triangle.setFillColor(sf::Color::Black);
+			line.setFillColor(color);
+			triangle.setFillColor(color);
 
 			float angle = atan(h / w) / 3.1415 * 180;
 
 			if (w <= 0) {
 				angle += 180.0;
 			}
-
-			
 
 			int x_triangle = x + cos(angle / 180.0 * 3.1415) * vector_length;
 			int y_triangle = y + sin(angle / 180.0 * 3.1415) * vector_length + vector_height / 2.0;
@@ -57,8 +56,31 @@ namespace Drawing {
 			rw->draw(line);
 			rw->draw(triangle);
 		}
-	}
 
+		sf::Color evaluate_color(double length) {
+
+			if (length > 50000) {
+				length = 50000; 
+			}
+
+			double factor_left = 1.0 - pow(2.71, -0.01 * length); 
+			double factor_right = 2 - (2 / (1 + pow(2.71, -0.0008 * length))); 
+
+			return sf::Color(factor_left * 255, factor_right * 255, 0);  
+		}
+	}
+	/*
+	
+	f(50) = 0.5
+	f(150) = 0.75
+	f(250) = 1.0 (f(x>250) >= 1.0) 
+
+	h(500) = 0.75
+	h(2500) = 0.5
+	h(10000) = 0.25
+	h(25000) = 0
+	
+	*/
 	void init_SFML(sf::RenderWindow** rw) {
 
 		*rw = new sf::RenderWindow(sf::VideoMode(screen_width, screen_height), "Elektromagnetische Felder");
@@ -72,11 +94,15 @@ namespace Drawing {
 		rw->clear(sf::Color::White); 
 
 		sf::CircleShape circle(10, 10); // radius = 10, Number of Points = 10
-		
+
 		// draw vectors
 		for (int i = 0; i < vectors.size(); i++) {
 			for (int i2 = 0; i2 < vectors[i].size(); i2++) {
-				draw_arrow(rw, vectors[i][i2]->x, vectors[i][i2]->y, vectors[i][i2]->vx, vectors[i][i2]->vy);
+				double length = Calculations::calculate_vector_length(vectors[i][i2]);
+
+				sf::Color color = evaluate_color(length); 
+ 
+				draw_arrow(rw, vectors[i][i2]->x, vectors[i][i2]->y, vectors[i][i2]->vx, vectors[i][i2]->vy, color);
 
 			}
 		}

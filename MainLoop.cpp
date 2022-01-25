@@ -14,7 +14,8 @@
 CONTROLS: 
 	m_left -> point_charge (positive) 
 	m_right -> point_charge (negative) 
-	mouse_wheel -> resize charge of point_charge
+	mouse_wheel (scroll) -> resize charge of point_charge
+	mouse_wheel (press) -> move around in the screen
 
 	key_D -> delete point_charge
 
@@ -45,42 +46,6 @@ namespace MainLoop {
 
 	void run() {
 		
-		// h / w
-
-		/*
-		
-		angle = atan (h / w) * 180 / 3.1415 
-		if w < 0: 
-			angle += 180
-
-		*/
- 
-		double angle = atan(0 / 1) * 180 / 3.1415;
-		std::cout << angle << std::endl;
-
-		angle = atan(1 / 1) * 180 / 3.1415;
-		std::cout << angle << std::endl;
-
-		angle = atan(1 / 0.0001) * 180 / 3.1415;
-		std::cout << angle << std::endl;
-
-		angle = atan(1 / -1) * 180 / 3.1415 + 180;
-		std::cout << angle << std::endl;
-
-		angle = atan(0 / -1) * 180 / 3.1415 + 180;
-		std::cout << angle << std::endl;
-
-		angle = atan(-1 / -1) * 180 / 3.1415 + 180;
-		std::cout << angle << std::endl;
-
-		angle = atan(-1 / -0.00001) * 180 / 3.1415 + 180; // oder nicht + 180
-		std::cout << angle << std::endl;
-
-		angle = atan(-1 / 1) * 180 / 3.1415;
-
-		std::cout << angle << std::endl;
-
-
 		// create variables
 		std::vector<Point_Charge*> point_charges;
 		std::array<std::array<my_vect*, points_per_row>, num_rows> vectors;
@@ -104,14 +69,13 @@ namespace MainLoop {
 		}
 
 		// cleanup
-		free_vec<Point_Charge>(point_charges); 
+		free_vec(point_charges); 
 		free_2d_array(vectors);
 
 		delete rw; 
 	}
 
-	template<typename T>
-	void free_vec(std::vector<T*>& vec) {
+	void free_vec(std::vector<Point_Charge*>& vec) {
 
 		for (int i = 0; i < vec.size(); i++) {
 			delete vec[i]; 

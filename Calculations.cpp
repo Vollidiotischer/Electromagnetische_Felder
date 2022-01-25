@@ -26,10 +26,10 @@ namespace Calculations {
 				double r = sqrt(dx * dx + dy * dy); 
 
 
-				double e = f_e(r, point_charges[i]->charge); 
+				double e = f_e(r, point_charges[i]->charge); // Whole electric field strength
 
-				double qx = (dx / (abs(dx + dy))) * e; 
-				double qy = (dy / (abs(dx + dy))) * e; 
+				double qx = (dx / (abs(dx) + abs(dy))) * e; // x comonent
+				double qy = (dy / (abs(dx) + abs(dy))) * e;  // y component
 
 				vect->vx += qx; 
 				vect->vy += qy; 
@@ -62,6 +62,11 @@ namespace Calculations {
 		}
 
 	}
+
+	double calculate_vector_length(my_vect* vec) {
+		return sqrt(vec->vx * vec->vx + vec->vy * vec->vy); 
+	}
+
 
 }
 

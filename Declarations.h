@@ -34,7 +34,7 @@ struct Point_Charge {
 	}
 
 	static int calculate_circle_size(int x) {
-		return floor(25 - 15 * pow(2.71, -0.1 * abs(x)));
+		return floor(50 - 40 * pow(2.71, -0.006 * abs(x)));
 	}
 };
 
@@ -48,4 +48,4 @@ constexpr int vector_length = 13;
 constexpr int vector_height = 3; 
 constexpr int circle_size = 5; 
 
-void initSFML(sf::RenderWindow*);
+constexpr int max_charge = 10000; 
