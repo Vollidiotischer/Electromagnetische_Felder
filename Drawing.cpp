@@ -36,7 +36,7 @@ namespace Drawing {
 
 			float angle = atan(h / w) / 3.1415 * 180;
 
-			if (w <= 0) {
+			if (w < 0) {
 				angle += 180.0;
 			}
 
