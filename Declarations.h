@@ -38,7 +38,7 @@ struct Point_Charge {
 	}
 };
 
-constexpr int screen_width = 1250; 
+constexpr int screen_width = 500; 
 constexpr int screen_height = 750; 
 
 constexpr int points_per_row = screen_width / 20; 
@@ -49,3 +49,4 @@ constexpr int vector_height = 3;
 constexpr int circle_size = 5; 
 
 constexpr int max_charge = 10000; 
+constexpr int starting_charge = 1; 

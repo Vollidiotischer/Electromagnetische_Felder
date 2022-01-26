@@ -28,7 +28,7 @@ namespace Events {
 			int mox = sf::Mouse::getPosition(*rw).x;
 			int moy = sf::Mouse::getPosition(*rw).y;
 
-			int charge_ammount = charge_is_positive ? 10 : -10;
+			int charge_ammount = charge_is_positive ? starting_charge : -1 * starting_charge;
 
 			point_charges.push_back(new Point_Charge(mox, moy, charge_ammount, Point_Charge::calculate_circle_size(charge_ammount)));
 
